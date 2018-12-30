@@ -60,6 +60,8 @@ public class SwipeRVTouchHelper extends ItemTouchHelper.SimpleCallback {
                 leftIcon.setImageResource(R.drawable.ic_archive_white_24dp);
                 backgroundLayout.setBackgroundResource(R.color.colorArchive);
             }
+            // If only want to allow swiping in one direction, you can actually delete the if-block and just
+            // keep the two lines of code
             View foreground = ((SwipeRVAdapter.SwipeRVViewHolder) viewHolder).getForegroundContainer();
             getDefaultUIUtil().onDraw(c, recyclerView, foreground, dX, dY, actionState, isCurrentlyActive);
         }

@@ -40,9 +40,9 @@ public class SwipeRVAdapter extends RecyclerView.Adapter<SwipeRVAdapter.SwipeRVV
             return foregroundContainer;
         }
 
-        public RelativeLayout getBackgroundContainer() {
+       /* public RelativeLayout getBackgroundContainer() {
             return backgroundContainer;
-        }
+        }*/
     }
 
     @NonNull
