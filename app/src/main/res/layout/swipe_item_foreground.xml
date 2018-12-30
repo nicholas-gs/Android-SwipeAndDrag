@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_foreground_container"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/colorDefaultWhite"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/swipe_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Name"
+        android:textColor="@color/colorFrom"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/swipe_item_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/swipe_item_name"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="1dp"
+        android:text="Email address"
+        android:textColor="@color/colorBackgroundCircleDefault" />
+
+
+</RelativeLayout>

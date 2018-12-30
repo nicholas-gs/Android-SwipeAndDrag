@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_nav_swipe"
+        android:icon="@drawable/gesture_swipe_horizontal"
+        android:title="Swipe" />
+
+    <item
+        android:id="@+id/bottom_nav_drag"
+        android:icon="@drawable/gesture_swipe_vertical"
+        android:title="Drag" />
+
+    <item
+        android:id="@+id/bottom_nav_both"
+        android:icon="@drawable/arrow_all"
+        android:title="Both" />
+
+</menu>

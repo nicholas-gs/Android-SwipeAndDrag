@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SwipeAndDrag</string>
+    <string name="url">https://jsonplaceholder.typicode.com/users</string>
+</resources>

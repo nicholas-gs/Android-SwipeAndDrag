@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#db4437</color>
+    <color name="colorPrimaryDark">#b93221</color>
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorFrom">#000000</color>
+    <color name="colorSubject">#111111</color>
+    <color name="colorIconTintSelected">#fed776</color>
+    <color name="colorBackgroundCircleDefault">#666666</color>
+    <color name="colorArchive">#2E7D32</color>
+    <color name="colorDefaultWhite">#fafafa</color>
+</resources>
