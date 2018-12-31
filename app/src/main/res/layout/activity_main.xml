@@ -30,6 +30,7 @@
         android:layout_below="@id/main_appbarlayout" />
 
     <android.support.design.widget.BottomNavigationView
+        android:elevation="6dp"
         android:id="@+id/main_bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

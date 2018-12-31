@@ -16,7 +16,7 @@ public class SwipeRVTouchHelper extends ItemTouchHelper.SimpleCallback {
     private SwipeRVTouchHelperListener listener;
 
     public interface SwipeRVTouchHelperListener {
-        void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position);
+        void onSwiped(int direction, int position);
     }
 
     public SwipeRVTouchHelper(SwipeRVTouchHelperListener listener, int dragDirs, int swipeDirs) {
@@ -26,12 +26,12 @@ public class SwipeRVTouchHelper extends ItemTouchHelper.SimpleCallback {
 
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-        return true;
+        return false;
     }
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        listener.onSwiped(viewHolder, i, viewHolder.getAdapterPosition());
+        listener.onSwiped(i, viewHolder.getAdapterPosition());
     }
 
     @Override
@@ -71,5 +71,17 @@ public class SwipeRVTouchHelper extends ItemTouchHelper.SimpleCallback {
     public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         View foreground = ((SwipeRVAdapter.SwipeRVViewHolder) viewHolder).getForegroundContainer();
         getDefaultUIUtil().clearView(foreground);
+    }
+
+    // Enable swiping
+    @Override
+    public boolean isItemViewSwipeEnabled() {
+        return true;
+    }
+
+    // Disable dragging
+    @Override
+    public boolean isLongPressDragEnabled() {
+        return false;
     }
 }

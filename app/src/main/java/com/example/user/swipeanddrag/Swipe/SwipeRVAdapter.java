@@ -68,7 +68,7 @@ public class SwipeRVAdapter extends RecyclerView.Adapter<SwipeRVAdapter.SwipeRVV
      * Remove an item from the recyclerview at index *position*
      * @param position
      */
-    public void removeItem(int position){
+    public void removeSwipeItem(int position){
         contacts.remove(position);
         this.notifyItemRemoved(position);
     }
@@ -78,7 +78,7 @@ public class SwipeRVAdapter extends RecyclerView.Adapter<SwipeRVAdapter.SwipeRVV
      * @param position
      * @param contact
      */
-    public void addItem(int position, Contact contact){
+    public void addSwipeItem(int position, Contact contact){
         contacts.add(position,contact);
         this.notifyItemInserted(position);
     }

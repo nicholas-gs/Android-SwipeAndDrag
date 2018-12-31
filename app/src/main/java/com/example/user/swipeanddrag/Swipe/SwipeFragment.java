@@ -102,16 +102,15 @@ public class SwipeFragment extends Fragment implements SwipeRVTouchHelper.SwipeR
 
     /**
      * Determine what happens after the item in recyclerview is swiped off
-     * @param viewHolder
      * @param direction
      * @param position
      */
     @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, final int position) {
+    public void onSwiped( int direction, final int position) {
         // Temporary store the swiped off item
         final Contact contact = contactArrayList.get(position);
         //Remove the item
-        adapter.removeItem(position);
+        adapter.removeSwipeItem(position);
         // If swipe left - delete the item
         if(direction == ItemTouchHelper.LEFT){
             Snackbar.make(recyclerView, "Contact deleted", Snackbar.LENGTH_LONG)
@@ -119,7 +118,7 @@ public class SwipeFragment extends Fragment implements SwipeRVTouchHelper.SwipeR
                     .setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            adapter.addItem(position, contact);
+                            adapter.addSwipeItem(position, contact);
                         }
                     }).show();
         } // If swipe left - archive the item
@@ -129,7 +128,7 @@ public class SwipeFragment extends Fragment implements SwipeRVTouchHelper.SwipeR
                     .setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            adapter.addItem(position, contact);
+                            adapter.addSwipeItem(position, contact);
                         }
                     }).show();
         }
