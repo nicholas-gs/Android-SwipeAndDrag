@@ -24,6 +24,7 @@ public class SwipeRVTouchHelper extends ItemTouchHelper.SimpleCallback {
         this.listener = listener;
     }
 
+    // Return false since we disable dragging
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
         return false;
@@ -42,6 +43,7 @@ public class SwipeRVTouchHelper extends ItemTouchHelper.SimpleCallback {
         }
     }
 
+    // Draw background differently, depending if it is a LEFT or RIGHT swipe
     @Override
     public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         // User swipes the item
@@ -60,8 +62,8 @@ public class SwipeRVTouchHelper extends ItemTouchHelper.SimpleCallback {
                 leftIcon.setImageResource(R.drawable.ic_archive_white_24dp);
                 backgroundLayout.setBackgroundResource(R.color.colorArchive);
             }
-            // If only want to allow swiping in one direction, you can actually delete the if-block and just
-            // keep the two lines of code
+            // If only want to allow swiping in one direction, you can actually delete the if-block above and just
+            // keep the two lines of code below
             View foreground = ((SwipeRVAdapter.SwipeRVViewHolder) viewHolder).getForegroundContainer();
             getDefaultUIUtil().onDraw(c, recyclerView, foreground, dX, dY, actionState, isCurrentlyActive);
         }

@@ -4,9 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.View;
 
-import com.example.user.swipeanddrag.R;
 
 public class DragRVTouchHelper extends ItemTouchHelper.SimpleCallback {
 
@@ -25,10 +23,6 @@ public class DragRVTouchHelper extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
         super.onSelectedChanged(viewHolder, actionState);
-
-       // View view = ((DragRVAdapter.DragRVViewHolder)viewHolder).getLayoutContainer();
-       // view.setBackgroundResource(R.color.colorBackgroundCircleDefault);
-
     }
 
     @Override
@@ -40,11 +34,6 @@ public class DragRVTouchHelper extends ItemTouchHelper.SimpleCallback {
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
         listener.onMove(viewHolder.getAdapterPosition(), viewHolder1.getAdapterPosition());
         return true;
-    }
-
-    @Override
-    public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-        super.clearView(recyclerView, viewHolder);
     }
 
     // Enable dragging
