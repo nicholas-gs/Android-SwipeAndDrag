@@ -54,11 +54,11 @@ Though most the code in the adapter is per usual (note that in `onCreateViewHold
 
 [_See code here_](https://github.com/wRorsjakz/Android-SwipeAndDrag/blob/master/app/src/main/java/com/example/user/swipeanddrag/Swipe/SwipeRVTouchHelper.java)
 
-Create a class which extends `ItemTouchHelper.SimpleCallback` and using the observer pattern, create a interface so that the recyclerview can listen to when the item has been swiped off the screen.
+Create a class which extends `ItemTouchHelper.SimpleCallback` and using the observer pattern, create a interface so that the recyclerview can listen to when `on the item has been swiped off the screen.
 
-You need to override the following five methods:
+You need to override the following methods:
 
-1. `onMove(...)` - simply return `true`
+1. `onMove(...)` - simply return `false` since we disable dragging
 
 2. `onSelectedChanged(...)`
 
@@ -68,24 +68,99 @@ You need to override the following five methods:
 
 5. `onSwiped(...)` - Called after the item is swiped off the screen, so code what will happen after that here
 
+6. `isLongPressDragEnabled()` - Return `false` to disable dragging
+
+7. `isItemViewSwipeEnabled()` - Return `true` to allow item to be swiped
+
 #### Fragment/Activity
 
 [_See code here_](https://github.com/wRorsjakz/Android-SwipeAndDrag/blob/master/app/src/main/java/com/example/user/swipeanddrag/Swipe/SwipeFragment.java)
 
-Have the class implement your `ItemTouchHelper` interface and override `onSwiped`. If the user can swipe in both direction, check which direction the user has swiped using `ItemTouchHelper.LEFT` or `ItemTouchHelper.RIGHT`.
+Have the class implement your `ItemTouchHelper` interface and override `onSwiped(...)`. If the user can swipe in both direction, check which direction the user has swiped using `ItemTouchHelper.LEFT` or `ItemTouchHelper.RIGHT`.
 
 In my example, I temperory store the deleted item before calling `removeItem(int position)` and showing a `Snackbar`. Use `addItem(int position, Contact contact)` to add the recently deleted item back.
 
-Finally, attach the listener to the recyclerview using `attachToRecyclerView()`
+Finally, attach the listener to the recyclerview using `attachToRecyclerView()`. Note that `0` since we have disabled dragging. Enable swiping direction by passing the appropriate params `ItemTouchHelper.DIRECTION`.
+
 ```java
 //Swping in both direction is enabled
 ItemTouchHelper.SimpleCallback simpleCallback = new SwipeRVTouchHelper(this,0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
 new ItemTouchHelper(simpleCallback).attachToRecyclerView(recyclerView);
 ```
 
-Control which direction swiping is enabled by passing the appropriate params `ItemTouchHelper.DIRECTION`.
+### Drag-and-drop
 
-## Dependencies
+#### Layout 
+
+[_See code here_](https://github.com/wRorsjakz/Android-SwipeAndDrag/blob/master/app/src/main/res/layout/drag_item_container.xml)
+
+Unlike the swipe-to-delete item above which has two seperate layouts for the foreground and background, you only need one this time.
+
+In order to give the individual recyclerview item a ripple effect after long-pressed, ensure to add the following attributes to the root layout
+
+```xml
+android:clickable="true"
+android:focusable="true"
+android:foreground="?android:attr/selectableItemBackground"
+```
+
+#### ItemTouchHelper
+
+[_See code here_](https://github.com/wRorsjakz/Android-SwipeAndDrag/blob/master/app/src/main/java/com/example/user/swipeanddrag/Drag/DragRVTouchHelper.java)
+
+Create a class which extends `ItemTouchHelper.SimpleCallback` and using the observer pattern, create a interface so that the fragment/activity can listen to when `onMove(...)` is called, which is when the item is being dragged.
+
+Override the following methods:
+
+1. `onSelectedChanged(...)`
+2. `onSwiped(...)` - Do nothing since swiping is disabled
+3. `onMove(...)` - Called when an item is being moved. Our fragment/activity will implement this method
+4. `isLongPressDragEnabled()` - Return `true` to enable an item to drag and drop after long pressed
+5. `isItemViewSwipeEnabled()` - Return `false` to prevent item from being able to swipe
+
+#### Fragment/Activity
+
+[_See code here_](https://github.com/wRorsjakz/Android-SwipeAndDrag/blob/master/app/src/main/java/com/example/user/swipeanddrag/Drag/DragFragment.java)
+
+Have the class implement your `ItemTouchHelper` interface and override `onMove(int originalPos, int newPos)`. We have to check if the user is dragging the recyclerview item up or down, and then swap the object in the `ArrayList` before calling `notifyItemMoved(...)`.
+
+```java
+@Override
+    public void onMove(int originalPos, int newPos) {
+
+        if (originalPos < newPos) {
+            //Drag item downwards
+            for (int i = originalPos; i < newPos; i++) {
+                Collections.swap(contactArrayList, i, i + 1);
+                adapter.notifyItemMoved(i, i + 1);
+            }
+        } else if (originalPos > newPos) {
+            //User drag up
+            for (int i = originalPos; i > newPos; i--) {
+                Collections.swap(contactArrayList, i, i - 1);
+                adapter.notifyItemMoved(i, i - 1);
+            }
+        }
+    }
+```
+
+Finally, attach the listener to the recyclerview using `attachToRecyclerView()`. Note that we pass `0` since that swipping is disabled. Also pass the appropriate params to enable dragging in both directions.
+
+```java
+ItemTouchHelper.SimpleCallback simpleCallback = new DragRVTouchHelper(this, ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0);
+new ItemTouchHelper(simpleCallback).attachToRecyclerView(recyclerView);
+
+```
+
+## Dependencies/Library
+
+1. [JSONPlaceholder](https://jsonplaceholder.typicode.com/) - Fake Online REST API for Testing and Prototyping, retrieved [`/users`](https://jsonplaceholder.typicode.com/users) resource
+
+2. Design Support Library
+
+3. RecyclerView
+
+4. Volley
 
 ```java
 //Design support library
