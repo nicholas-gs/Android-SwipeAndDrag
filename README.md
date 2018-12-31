@@ -16,9 +16,13 @@ This github repository tries to implement the above features.
 
 ## App in action
 
-![ezgif com-crop](https://user-images.githubusercontent.com/39665412/50549419-899eee00-0c97-11e9-9333-279aa9f3ae24.gif)
+Swipe                    | Drag
+:-------------------------:|:-------------------------:
+![ezgif com-crop](https://user-images.githubusercontent.com/39665412/50549419-899eee00-0c97-11e9-9333-279aa9f3ae24.gif) |![drag-example-gif](https://user-images.githubusercontent.com/39665412/50563495-3e004900-0d58-11e9-9ef4-e4b6f54e7043.gif)
+Swipe left to delete, swipe right to archive | Drag recyclerview item up or down to rearrange
 
 ## Guide
+
 The `ItemTouchHelper` class is key to implementing the above features - it is a utility class specifically designed to support such tasks for a recyclerview.
 
 ### Swipe-to-delete
