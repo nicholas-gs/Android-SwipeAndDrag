@@ -158,6 +158,8 @@ new ItemTouchHelper(simpleCallback).attachToRecyclerView(recyclerView);
 
 ## Dependencies/Library
 
+Project has been migrated to AndroidX
+
 1. [JSONPlaceholder](https://jsonplaceholder.typicode.com/) - Fake Online REST API for Testing and Prototyping, retrieved [`/users`](https://jsonplaceholder.typicode.com/users) resource
 
 2. Design Support Library
@@ -165,15 +167,6 @@ new ItemTouchHelper(simpleCallback).attachToRecyclerView(recyclerView);
 3. RecyclerView
 
 4. Volley
-
-```java
-//Design support library
-implementation 'com.android.support:design:28.0.0'
-//RecyclerView
-implementation 'com.android.support:recyclerview-v7:28.0.0'
-//Volley
-implementation 'com.android.volley:volley:1.1.1'
-```
 
 ## License
 
